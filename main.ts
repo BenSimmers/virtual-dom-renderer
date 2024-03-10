@@ -4,6 +4,26 @@ type VNode = {
   children: string | VNode[];
 };
 
+const Component = (props: Record<string, any>) => {
+  const { title, text } = props;
+  return {
+    type: "div",
+    props: { class: "component" },
+    children: [
+      {
+        type: "h2",
+        props: { class: "component-title" },
+        children: title,
+      },
+      {
+        type: "p",
+        props: { class: "component-text" },
+        children: text,
+      },
+    ],
+  };
+};
+
 const entry: HTMLElement | null = document.getElementById("root");
 
 const dom: VNode = {
@@ -21,6 +41,7 @@ const dom: VNode = {
       children:
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.",
     },
+    Component({ title: "Component Title", text: "Component Text" }),
   ],
 };
 
@@ -36,7 +57,7 @@ function render(vdom: VNode, container: HTMLElement | null) {
       } else if (value === true) {
         el.setAttribute(key, "");
       } else if (value !== false && value != null) {
-        el[key] = value;
+        (el as any)[key] = value;
       }
     }
 

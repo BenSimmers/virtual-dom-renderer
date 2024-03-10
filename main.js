@@ -1,3 +1,22 @@
+var Component = function (props) {
+    var title = props.title, text = props.text;
+    return {
+        type: "div",
+        props: { class: "component" },
+        children: [
+            {
+                type: "h2",
+                props: { class: "component-title" },
+                children: title,
+            },
+            {
+                type: "p",
+                props: { class: "component-text" },
+                children: text,
+            },
+        ],
+    };
+};
 var entry = document.getElementById("root");
 var dom = {
     type: "div",
@@ -13,6 +32,7 @@ var dom = {
             props: { class: "bar" },
             children: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.",
         },
+        Component({ title: "Component Title", text: "Component Text" }),
     ],
 };
 // const render = (vdom, container) => {
